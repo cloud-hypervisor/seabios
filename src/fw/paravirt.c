@@ -134,8 +134,8 @@ static void qemu_detect(void)
     u16 sv = pci_config_readw(0, PCI_SUBSYSTEM_VENDOR_ID);
     u16 sd = pci_config_readw(0, PCI_SUBSYSTEM_ID);
 
-    if (sv != 0x1af4 || /* Red Hat, Inc */
-        sd != 0x1100)   /* Qemu virtual machine */
+    if ((sv != 0x1af4 /* Red Hat, Inc */ ||  sd != 0x1100) /* Qemu virtual machine */ &&
+	(sv != 0x8086 /* Intel */ || sd != 0x0d57 /* Cloud Hypervisor */))
         return;
 
     PlatformRunningOn |= PF_QEMU;
